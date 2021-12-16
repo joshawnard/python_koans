@@ -11,22 +11,23 @@ class AboutIteration(Koan):
         total = 0
 
         for num in it:
+            print(num)
             total += num
 
-        self.assertEqual(__ , total)
+        self.assertEqual(15, total)
 
     def test_iterating_with_next(self):
-        stages = iter(['alpha','beta','gamma'])
+        stages = iter(['alpha', 'beta', 'gamma'])
 
         try:
-            self.assertEqual(__, next(stages))
+            self.assertEqual('alpha', next(stages))
             next(stages)
-            self.assertEqual(__, next(stages))
+            self.assertEqual('gamma', next(stages))
             next(stages)
         except StopIteration as ex:
             err_msg = 'Ran out of iterations'
 
-        self.assertRegex(err_msg, __)
+        self.assertRegex(err_msg, 'Ran out of iterations')
 
     # ------------------------------------------------------------------
 
@@ -40,14 +41,14 @@ class AboutIteration(Koan):
         mapping = map(self.add_ten, seq)
 
         self.assertNotEqual(list, mapping.__class__)
-        self.assertEqual(__, mapping.__class__)
+        self.assertEqual(map, mapping.__class__)
         # In Python 3 built in iterator funcs return iterable view objects
         # instead of lists
 
         for item in mapping:
             mapped_seq.append(item)
 
-        self.assertEqual(__, mapped_seq)
+        self.assertEqual([11, 12, 13], mapped_seq)
 
         # Note, iterator methods actually return objects of iter type in
         # python 3. In python 2 map() would give you a list.
@@ -62,7 +63,7 @@ class AboutIteration(Koan):
         for item in filter(is_even, seq):
             even_numbers.append(item)
 
-        self.assertEqual(__, even_numbers)
+        self.assertEqual([2, 4, 6], even_numbers)
 
     def test_filter_returns_all_items_matching_criterion(self):
         def is_big_name(item):
@@ -71,8 +72,8 @@ class AboutIteration(Koan):
         names = ["Jim", "Bill", "Clarence", "Doug", "Eli", "Elizabeth"]
         iterator = filter(is_big_name, names)
 
-        self.assertEqual(__, next(iterator))
-        self.assertEqual(__, next(iterator))
+        self.assertEqual('Clarence', next(iterator))
+        self.assertEqual('Elizabeth', next(iterator))
 
         try:
             next(iterator)
@@ -80,11 +81,11 @@ class AboutIteration(Koan):
         except StopIteration:
             msg = 'Ran out of big names'
 
-        self.assertEquals(__, msg)
+        self.assertEquals('Ran out of big names', msg)
 
     # ------------------------------------------------------------------
 
-    def add(self,accum,item):
+    def add(self, accum, item):
         return accum + item
 
     def multiply(self,accum,item):
